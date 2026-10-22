@@ -1,99 +1,222 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# RSSCrawler 🚀
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project is a powerful RSS feed aggregator and summarizer built with NestJS and TypeScript. It fetches articles from various RSS feeds, cleans and extracts their content, and can optionally summarize them using the Google Gemini API. The project also manages publishers and feeds, storing articles in a PostgreSQL database.
 
-## Description
+## Badges 🏅
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+| Badge | Description |
+|---|---|
+| ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) | Written in TypeScript |
+| ![NestJS](https://img.shields.io/badge/nestjs-339933?style=for-the-badge&logo=nestjs&logoColor=white) | Built with NestJS framework |
+| ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white) | Uses PostgreSQL for data storage |
+| ![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white) | Integrates with Google Gemini for summarization |
+| ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) | Docker support (not explicitly configured but feasible) |
 
-## Project setup
+---
 
+## Table of Contents 📚
+
+- [Project Title & Badges](#rsscrawler-🚀)
+- [Description](#description)
+- [Table of Contents](#table-of-contents-📚)
+- [Features](#features-✨)
+- [Tech Stack](#tech-stack-🛠️)
+- [Installation](#installation-⚙️)
+- [Usage](#usage-💡)
+- [How to Use](#how-to-use-👉)
+- [API Reference](#api-reference-📚)
+- [License](#license-📜)
+- [Footer](#footer-❤️)
+
+---
+
+## Features ✨
+
+*   **RSS Feed Aggregation:** Fetches and parses articles from multiple RSS feeds.
+*   **Content Extraction:** Extracts clean article content from web pages using `@mozilla/readability` and `jsdom`.
+*   **Content Summarization:** Leverages the Google Gemini API to summarize extracted article content.
+*   **Database Persistence:** Stores publishers, feeds, and articles using TypeORM with PostgreSQL.
+*   **Scheduled Fetching:** Automatically fetches RSS feeds at regular intervals (e.g., every 2 hours).
+*   **API Endpoints:** Provides RESTful API endpoints for managing publishers, feeds, and articles, as well as for direct RSS scraping and content extraction/summarization.
+*   **Swagger Documentation:** Integrated Swagger UI for API documentation.
+*   **Input Validation:** Utilizes `class-validator` and `class-transformer` for robust API input validation.
+*   **Error Handling:** Implements basic error handling and logging.
+
+---
+
+## Tech Stack 🛠️
+
+*   **Language:** TypeScript
+*   **Framework:** NestJS
+*   **Database:** PostgreSQL (with TypeORM)
+*   **API Documentation:** Swagger
+*   **Content Extraction:** `@mozilla/readability`, `jsdom`, `cheerio`
+*   **Summarization:** `@google/generative-ai` (Google Gemini)
+*   **Scheduling:** `@nestjs/schedule`
+*   **Utilities:** `rss-parser`, `cross-fetch`, `sanitize-html`, `slugify`
+*   **Development Tools:** Node.js, npm/yarn, ESLint, Prettier, Jest, SWC
+
+---
+
+## Installation ⚙️
+
+### Prerequisites
+
+*   **Node.js:** Version 18.0.0 or higher.
+*   **npm or yarn:** Package manager.
+*   **PostgreSQL:** A running PostgreSQL database instance.
+
+### Steps
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/phambaophuc/RSSCrawler.git
+    cd RSSCrawler
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3.  **Configure environment variables:**
+    Create a `.env` file in the root directory and populate it with your database and Gemini API credentials. Example:
+
+    ```env
+    # Database Configuration
+    DB_URL=postgres://<user>:<password>@<host>:<port>/<database>
+    DB_SYNCHRONIZE=false # Set to true for development if needed, but false is recommended for production
+
+    # Gemini API Configuration
+    GEMINI_KEY=<your_gemini_api_key>
+    GEMINI_MODEL=<gemini_model_name> # e.g., gemini-pro
+
+    # Application Port
+    APP_PORT=3000
+    ```
+
+4.  **Run database migrations (if applicable) or ensure schema is set up.**
+    *Note: The `synchronize: false` in `typeorm.config.ts` indicates that schema management should be handled via migrations. If you are in a development environment and prefer automatic schema synchronization, you can set `DB_SYNCHRONIZE=true` in your `.env` file, or manually manage migrations.*
+
+5.  **Build the project:**
+    ```bash
+    npm run build
+    ```
+
+6.  **Start the application:**
+    ```bash
+    npm run start
+    ```
+    For development with watch mode:
+    ```bash
+    npm run start:dev
+    ```
+
+---
+
+## Usage 💡
+
+This project serves as a backend API for aggregating, processing, and summarizing RSS feed content. It can be used to build applications that:
+
+*   **Automate content curation:** Collect articles from specified RSS feeds.
+*   **Generate newsletters:** Summarize content and compile it into newsletters.
+*   **Provide content analysis:** Extract and process information from various web sources.
+
+---
+
+## How to Use 👉
+
+### 1. Managing Publishers and Feeds
+
+**Create a Publisher:**
 ```bash
-$ npm install
+POST /api/publishers
+Body: {
+  "name": "Example Publisher",
+  "homepage": "https://example.com"
+}
 ```
 
-## Compile and run the project
-
+**Create a Feed for a Publisher:**
 ```bash
-# development
-$ npm run start
+POST /api/feeds
+Body: {
+  "name": "Example Feed",
+  "url": "https://example.com/rss"
+}
+```
+*(Note: The publisher ID is implicitly handled by the backend, likely through association in the service layer or by requiring a publisher association during feed creation if the API were more complex.)*
 
-# watch mode
-$ npm run start:dev
+### 2. Fetching and Summarizing Content
 
-# production mode
-$ npm run start:prod
+**Manually Trigger RSS Scraping (for a single feed URL):**
+This endpoint is primarily for testing or manual initiation.
+```bash
+POST /api/rss
+Body: {
+  "feedUrl": "https://example.com/rss"
+}
 ```
 
-## Run tests
-
+**Extract Content from a URL:**
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+GET /api/extract?url=https://example.com/article-url
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+**Summarize Content from a URL:**
+This endpoint uses the Gemini API to provide a summary.
 ```bash
-$ npm install -g mau
-$ mau deploy
+GET /api/extract/summarize?url=https://example.com/article-url
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 3. Accessing Articles
 
-## Resources
+**Get Paginated Articles (with optional filters):**
+```bash
+GET /api/articles?page=1&limit=10&feedId=<feed_id>&publisherId=<publisher_id>
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+### 4. Accessing Feeds
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**Get all Feeds:**
+```bash
+GET /api/feeds
+```
 
-## Support
+### 5. Accessing Publishers
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+**Get all Publishers:**
+```bash
+GET /api/publishers
+```
 
-## Stay in touch
+**Get Publisher by Slug:**
+```bash
+GET /api/publishers/<publisher_slug>
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## API Reference 📚
 
-## License
+This project uses Swagger for API documentation. After starting the application, you can access the interactive API documentation at:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+*   **Swagger UI:** `http://localhost:<APP_PORT>/swagger`
+
+*(Replace `<APP_PORT>` with your configured application port, default is 3000)*
+
+## License 📜
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Footer ❤️
+
+© 2023 RSSCrawler
+
+This project is maintained by [phambaophuc](https://github.com/phambaophuc).
+
+*   [Repository](https://github.com/phambaophuc/RSSCrawler)
+*   [Star ⭐](https://github.com/phambaophuc/RSSCrawler/stargazers)
+*   [Fork 🍴](https://github.com/phambaophuc/RSSCrawler/fork)
+*   [Issues 🐞](https://github.com/phambaophuc/RSSCrawler/issues)
