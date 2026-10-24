@@ -212,8 +212,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Footer ❤️
 
-© 2023 RSSCrawler
-
 This project is maintained by [phambaophuc](https://github.com/phambaophuc).
 
 *   [Repository](https://github.com/phambaophuc/RSSCrawler)
